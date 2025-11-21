@@ -143,6 +143,6 @@ Job Market Monitor addresses the real need for centralized job searching by:
 
 This project is for educational purposes as part of Web Infrastructure assignment.
 
-## 👨‍💻 Author
+## Author
 
 Bior Majok - Web Infrastructure Summative Assessment
