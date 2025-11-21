@@ -34,11 +34,11 @@ function showApiSettings() {
     const hasAdzunaKeys = window.configManager?.hasValidAdzunaKeys();
     
     modalBody.innerHTML = `
-        <h2>⚙️ API Settings</h2>
+        <h2>API Settings</h2>
         <div class="api-settings">
             <div class="api-section">
                 <h3>JSearch API (RapidAPI)</h3>
-                <p><strong>Status:</strong> ${hasJSearchKey ? '🟢 Configured' : '🔴 Not Configured'}</p>
+                <p><strong>Status:</strong> ${hasJSearchKey ? 'Configured' : 'Not Configured'}</p>
                 <div class="form-group">
                     <label for="jsearchApiKey">API Key:</label>
                     <input type="password" id="jsearchApiKey" placeholder="Enter JSearch API key" value="${hasJSearchKey ? '••••••••••••••••' : ''}">
@@ -50,7 +50,7 @@ function showApiSettings() {
             
             <div class="api-section">
                 <h3>Adzuna API</h3>
-                <p><strong>Status:</strong> ${hasAdzunaKeys ? '🟢 Configured' : '🔴 Not Configured'}</p>
+                <p><strong>Status:</strong> ${hasAdzunaKeys ? 'Configured' : 'Not Configured'}</p>
                 <div class="form-group">
                     <label for="adzunaApiId">App ID:</label>
                     <input type="text" id="adzunaApiId" placeholder="Enter Adzuna App ID" value="${hasAdzunaKeys ? '••••••••' : ''}">
@@ -98,10 +98,10 @@ function saveAllApiKeys() {
     }
     
     if (saved) {
-        showNotification('API keys saved successfully! 🔑', 'success');
+        showNotification('API keys saved successfully!', 'success');
         closeModal();
     } else {
-        showNotification('Please enter valid API credentials! ⚠️', 'warning');
+        showNotification('Please enter valid API credentials!', 'warning');
     }
 }
 
@@ -126,22 +126,22 @@ async function testApiConnection() {
     const hasAdzuna = window.configManager?.hasValidAdzunaKeys();
     
     if (!hasJSearch && !hasAdzuna) {
-        showNotification('No API keys configured! ⚠️', 'warning');
+        showNotification('No API keys configured!', 'warning');
         return;
     }
     
-    showNotification('Testing API connections... 🔄', 'info');
+    showNotification('Testing API connections...', 'info');
     
     try {
         const testJobs = await searchJobs('software developer', '', 1);
         if (testJobs && testJobs.length > 0) {
             const sources = [...new Set(testJobs.map(job => job.source))];
-            showNotification(`API connection successful! Sources: ${sources.join(', ')} ✅`, 'success');
+            showNotification(`API connection successful! Sources: ${sources.join(', ')}`, 'success');
         } else {
-            showNotification('APIs connected but no data returned 🤔', 'warning');
+            showNotification('APIs connected but no data returned', 'warning');
         }
     } catch (error) {
-        showNotification('API connection test failed! ❌', 'error');
+        showNotification('API connection test failed!', 'error');
         console.error('API test error:', error);
     }
 }
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Welcome message
         setTimeout(() => {
-            showNotification('Welcome to Job Market Monitor! 🚀', 'success');
+            showNotification('Welcome to Job Market Monitor!', 'success');
         }, 1000);
         
         // Load recommendations after initial load
@@ -261,10 +261,10 @@ function showSection(sectionName) {
     
     // Show section-specific notification
     const sectionMessages = {
-        'dashboard': 'Dashboard loaded 📊',
-        'savedJobs': 'Saved jobs loaded 💾',
-        'alerts': 'Job alerts loaded 🔔',
-        'analytics': 'Analytics loaded 📈'
+        'dashboard': 'Dashboard loaded',
+        'savedJobs': 'Saved jobs loaded',
+        'alerts': 'Job alerts loaded',
+        'analytics': 'Analytics loaded'
     };
     
     if (sectionMessages[sectionName]) {
@@ -593,10 +593,10 @@ async function loadSampleJobs() {
             
             // Show which APIs are working
             const sources = [...new Set(apiJobs.map(job => job.source))];
-            showNotification(`Real job data loaded from: ${sources.join(', ')}! 🌐`, 'success');
+            showNotification(`Real job data loaded from: ${sources.join(', ')}!`, 'success');
             
             // Update API status indicator
-            document.getElementById('apiStatus').textContent = `🌐 ${sources.join(' + ')} Active`;
+            document.getElementById('apiStatus').textContent = `${sources.join(' + ')} Active`;
         } else {
             throw new Error('No API data');
         }
@@ -605,8 +605,8 @@ async function loadSampleJobs() {
         const jobs = getSampleJobs();
         displayJobs(jobs);
         document.getElementById('jobsCount').textContent = `${jobs.length} jobs available`;
-        showNotification('Sample data loaded - Configure API keys for real data 📋', 'info');
-        document.getElementById('apiStatus').textContent = '🔴 Sample Data Mode';
+        showNotification('Sample data loaded - Configure API keys for real data', 'info');
+        document.getElementById('apiStatus').textContent = 'Sample Data Mode';
     }
 }
 
@@ -633,7 +633,7 @@ function showJobDetails(jobId) {
             <div class="detail-row"><strong>Salary:</strong> ${job.salary}</div>
             <div class="detail-row"><strong>Type:</strong> ${job.type}</div>
             <div class="detail-row"><strong>Posted:</strong> ${job.posted}</div>
-            <div class="detail-row"><strong>Rating:</strong> ⭐ ${job.rating}</div>
+            <div class="detail-row"><strong>Rating:</strong> ${job.rating}</div>
             <div class="detail-row"><strong>Applicants:</strong> ${job.applicants}</div>
         </div>
         <div class="job-description">
@@ -664,9 +664,9 @@ function saveJob(jobId) {
     if (!savedJobs.includes(jobId)) {
         savedJobs.push(jobId);
         localStorage.setItem('savedJobs', JSON.stringify(savedJobs));
-        showNotification('Job saved successfully! 💾', 'success');
+        showNotification('Job saved successfully!', 'success');
     } else {
-        showNotification('Job already saved! ✅', 'info');
+        showNotification('Job already saved!', 'info');
     }
 }
 
@@ -687,14 +687,14 @@ function applyToJob(jobId) {
     const alreadyApplied = applications.some(app => app.jobId === jobId);
     
     if (alreadyApplied) {
-        showNotification('You have already applied to this job! ✅', 'info');
+        showNotification('You have already applied to this job!', 'info');
         return;
     }
     
     // If job has external apply URL, open it
     if (job.applyUrl) {
         window.open(job.applyUrl, '_blank');
-        showNotification('Redirected to external application! 🔗', 'info');
+        showNotification('Redirected to external application!', 'info');
         return;
     }
     
@@ -802,20 +802,20 @@ function submitApplication(jobId) {
     const termsAccept = document.getElementById('termsAccept').checked;
     
     if (!fullName || !email || !phone || !experience || !resume || !availability || !termsAccept) {
-        showNotification('Please fill in all required fields! ⚠️', 'warning');
+        showNotification('Please fill in all required fields!', 'warning');
         return;
     }
     
     // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        showNotification('Please enter a valid email address! ⚠️', 'warning');
+        showNotification('Please enter a valid email address!', 'warning');
         return;
     }
     
     // Validate file size (5MB limit)
     if (resume.size > 5 * 1024 * 1024) {
-        showNotification('Resume file size must be less than 5MB! ⚠️', 'warning');
+        showNotification('Resume file size must be less than 5MB!', 'warning');
         return;
     }
     
@@ -849,7 +849,7 @@ function showApplicationSuccess(applicationData) {
     
     modalBody.innerHTML = `
         <div class="application-success">
-            <div class="success-icon">🎉</div>
+            <div class="success-icon">Success!</div>
             <h2>Application Submitted Successfully!</h2>
             <p>Thank you for your interest in the ${applicationData.jobTitle} position at ${applicationData.company}.</p>
             
@@ -876,7 +876,7 @@ function showApplicationSuccess(applicationData) {
     document.getElementById('applyJobBtn').textContent = 'Close';
     document.getElementById('applyJobBtn').onclick = closeModal;
     
-    showNotification(`Application submitted for ${applicationData.jobTitle}! 🚀`, 'success');
+    showNotification(`Application submitted for ${applicationData.jobTitle}!`, 'success');
 }
 
 function loadSavedJobs() {
@@ -906,7 +906,7 @@ function removeSavedJob(jobId) {
     savedJobs = savedJobs.filter(id => id !== jobId);
     localStorage.setItem('savedJobs', JSON.stringify(savedJobs));
     loadSavedJobs();
-    showNotification('Job removed from saved list! 🗑️', 'info');
+    showNotification('Job removed from saved list!', 'info');
 }
 
 function toggleView(viewType) {
@@ -934,7 +934,7 @@ function applyAdvancedFilters() {
     const industry = document.getElementById('industryFilter').value;
     const datePosted = document.getElementById('datePostedFilter').value;
     
-    showNotification('Advanced filters applied! 🔍', 'success');
+    showNotification('Advanced filters applied!', 'success');
     closeModal();
     
     // Apply filters to current job list
@@ -945,7 +945,7 @@ function clearAdvancedFilters() {
     document.getElementById('companySizeFilter').value = '';
     document.getElementById('industryFilter').value = '';
     document.getElementById('datePostedFilter').value = '';
-    showNotification('Filters cleared! 🧹', 'info');
+    showNotification('Filters cleared!', 'info');
 }
 
 function createJobAlert() {
@@ -954,7 +954,7 @@ function createJobAlert() {
     const frequency = document.getElementById('alertFrequency').value;
     
     if (!keywords && !location) {
-        showNotification('Please enter keywords or location for the alert! ⚠️', 'warning');
+        showNotification('Please enter keywords or location for the alert!', 'warning');
         return;
     }
     
@@ -974,7 +974,7 @@ function createJobAlert() {
     document.getElementById('alertKeywords').value = '';
     document.getElementById('alertLocation').value = '';
     
-    showNotification('Job alert created successfully! 🔔', 'success');
+    showNotification('Job alert created successfully!', 'success');
     loadJobAlerts();
 }
 
@@ -1004,7 +1004,7 @@ function deleteAlert(alertId) {
     alerts = alerts.filter(alert => alert.id !== alertId);
     localStorage.setItem('jobAlerts', JSON.stringify(alerts));
     loadJobAlerts();
-    showNotification('Alert deleted! 🗑️', 'info');
+    showNotification('Alert deleted!', 'info');
 }
 
 function showQuickAlert() {
@@ -1015,7 +1015,7 @@ function showQuickAlert() {
         document.getElementById('alertKeywords').value = keywords;
         document.getElementById('alertLocation').value = location;
         showSection('alerts');
-        showNotification('Quick alert setup ready! 🚀', 'info');
+        showNotification('Quick alert setup ready!', 'info');
     } else {
         createSmartAlert();
     }
@@ -1072,10 +1072,10 @@ function loadAnalytics() {
     
     // Live updates
     const updates = [
-        { text: '🆕 8 new Marketing Manager jobs posted', time: '2 min ago' },
-        { text: '📈 Tourism sector salaries up 12%', time: '15 min ago' },
-        { text: '🔥 Agricultural specialists in high demand', time: '1 hour ago' },
-        { text: '💼 International organizations hiring +25%', time: '2 hours ago' }
+        { text: '8 new Marketing Manager jobs posted', time: '2 min ago' },
+        { text: 'Tourism sector salaries up 12%', time: '15 min ago' },
+        { text: 'Agricultural specialists in high demand', time: '1 hour ago' },
+        { text: 'International organizations hiring +25%', time: '2 hours ago' }
     ];
     
     const liveUpdatesEl = document.getElementById('liveUpdates');
@@ -1274,7 +1274,7 @@ function searchTrending(keyword) {
 function applySorting() {
     const sortBy = document.getElementById('sortBy').value;
     if (sortBy) {
-        showNotification(`Sorted by ${sortBy}! 📊`, 'info');
+        showNotification(`Sorted by ${sortBy}!`, 'info');
         performSearch();
     }
 }
@@ -1285,7 +1285,7 @@ function calculateSalary() {
     const location = document.getElementById('locationCalc').value;
     
     if (!jobTitle) {
-        showNotification('Please enter a job title! 💼', 'warning');
+        showNotification('Please enter a job title!', 'warning');
         return;
     }
     
@@ -1330,13 +1330,13 @@ function calculateSalary() {
     const range = Math.round(estimatedSalary * 0.15);
     
     document.getElementById('salaryResult').innerHTML = `
-        <h4>💰 Estimated Salary Range</h4>
+        <h4>Estimated Salary Range</h4>
         <div class="salary-range">$${(estimatedSalary - range).toLocaleString()} - $${(estimatedSalary + range).toLocaleString()}</div>
         <div class="salary-note">Based on ${experience} level experience in ${location || 'average market'}</div>
     `;
     
     document.getElementById('salaryResult').style.display = 'block';
-    showNotification('Salary calculated! 💰', 'success');
+    showNotification('Salary calculated!', 'success');
 }
 
 function exportJobData() {
@@ -1353,13 +1353,13 @@ function exportJobData() {
     link.click();
     document.body.removeChild(link);
     
-    showNotification('Job data exported! 📄', 'success');
+    showNotification('Job data exported!', 'success');
 }
 
 function viewMyApplications() {
     const applications = JSON.parse(localStorage.getItem('applications') || '[]');
     if (applications.length === 0) {
-        showNotification('No applications yet! Start applying to jobs! 🚀', 'info');
+        showNotification('No applications yet! Start applying to jobs!', 'info');
         return;
     }
     
@@ -1403,7 +1403,7 @@ function withdrawApplication(applicationId) {
         applications = applications.filter(app => app.applicationId !== applicationId);
         localStorage.setItem('applications', JSON.stringify(applications));
         
-        showNotification('Application withdrawn successfully! 🗑️', 'info');
+        showNotification('Application withdrawn successfully!', 'info');
         viewMyApplications(); // Refresh the view
     }
 }
@@ -1427,10 +1427,10 @@ function trackApplication(applicationId) {
             );
             localStorage.setItem('applications', JSON.stringify(updatedApplications));
             
-            showNotification(`Status updated to: ${app.status}! 📈`, 'success');
+            showNotification(`Status updated to: ${app.status}!`, 'success');
             viewMyApplications(); // Refresh the view
         } else {
-            showNotification('Application is at final stage! ✅', 'info');
+            showNotification('Application is at final stage!', 'info');
         }
     }
 }
@@ -1466,17 +1466,17 @@ function displayJobs(jobs) {
         
         return `
             <div class="job-card ${job.urgent ? 'urgent-job' : ''}" onclick="showJobDetails(${job.id})">
-                ${job.urgent ? '<div class="urgent-badge">🔥 URGENT</div>' : ''}
+                ${job.urgent ? '<div class="urgent-badge">URGENT</div>' : ''}
                 <div class="job-header">
                     <h3 class="job-title">${job.title}</h3>
-                    <div class="job-rating">⭐ ${job.rating}</div>
+                    <div class="job-rating">${job.rating}</div>
                 </div>
                 <div class="job-company">${job.company}</div>
                 <div class="job-location">📍 ${job.location}</div>
                 <div class="job-salary">💰 ${job.salary}</div>
                 <div class="job-type">${job.type}</div>
-                <div class="job-posted">🕒 ${job.posted}</div>
-                <div class="job-applicants">👥 ${job.applicants} applicants</div>
+                <div class="job-posted">${job.posted}</div>
+                <div class="job-applicants">${job.applicants} applicants</div>
                 <div class="job-tags">
                     ${job.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
                 </div>
@@ -1486,12 +1486,12 @@ function displayJobs(jobs) {
                 </div>
                 <div class="job-actions">
                     <button onclick="event.stopPropagation(); saveJob(${job.id})" class="btn-save ${isSaved ? 'saved' : ''}">
-                        ${isSaved ? '✅ Saved' : '💾 Save'}
+                        ${isSaved ? 'Saved' : 'Save'}
                     </button>
                     <button onclick="event.stopPropagation(); applyToJob(${job.id})" class="btn-apply ${hasApplied ? 'applied' : ''}">
-                        ${hasApplied ? '✅ Applied' : 'Apply Now'}
+                        ${hasApplied ? 'Applied' : 'Apply Now'}
                     </button>
-                    <button onclick="event.stopPropagation(); shareJob(${job.id})" class="btn-share">🔗 Share</button>
+                    <button onclick="event.stopPropagation(); shareJob(${job.id})" class="btn-share">Share</button>
                 </div>
             </div>
         `;
@@ -1513,7 +1513,7 @@ function shareJob(jobId) {
         } else {
             // Fallback - copy to clipboard
             navigator.clipboard.writeText(shareText).then(() => {
-                showNotification('Job details copied to clipboard! 📋', 'success');
+                showNotification('Job details copied to clipboard!', 'success');
             });
         }
     }
@@ -1551,16 +1551,16 @@ async function performAdvancedSearch() {
         document.getElementById('jobsCount').textContent = `${jobs.length} jobs found`;
         
         if (jobs.length === 0) {
-            showNotification('No jobs found. Try different filters! 🤔', 'info');
+            showNotification('No jobs found. Try different filters!', 'info');
         } else {
-            showNotification(`Found ${jobs.length} real jobs! 🎉`, 'success');
+            showNotification(`Found ${jobs.length} real jobs!`, 'success');
         }
         
         saveSearchToHistory(keywords, location);
     } catch (error) {
         document.getElementById('loading').style.display = 'none';
         console.error('Search error:', error);
-        showNotification('Search failed. Using sample data. 🔄', 'warning');
+        showNotification('Search failed. Using sample data.', 'warning');
         
         // Fallback to sample data
         let jobs = getSampleJobs().filter(job => {
@@ -1683,14 +1683,14 @@ function toggleJobComparison(jobId) {
     const index = comparisonList.indexOf(jobId);
     if (index > -1) {
         comparisonList.splice(index, 1);
-        showNotification('Job removed from comparison! 📋', 'info');
+        showNotification('Job removed from comparison!', 'info');
     } else {
         if (comparisonList.length >= 3) {
-            showNotification('Maximum 3 jobs can be compared! ⚠️', 'warning');
+            showNotification('Maximum 3 jobs can be compared!', 'warning');
             return;
         }
         comparisonList.push(jobId);
-        showNotification('Job added to comparison! 📋', 'success');
+        showNotification('Job added to comparison!', 'success');
     }
     
     updateComparisonUI();
@@ -1778,7 +1778,7 @@ function showJobComparison() {
 function clearComparison() {
     comparisonList = [];
     updateComparisonUI();
-    showNotification('Comparison cleared! 🗑️', 'info');
+    showNotification('Comparison cleared!', 'info');
 }
 
 // Auto-refresh functionality
@@ -1787,7 +1787,7 @@ function setupAutoRefresh() {
     setInterval(() => {
         const randomChance = Math.random();
         if (randomChance < 0.1) { // 10% chance every 30 seconds
-            showNotification('🆕 New jobs available! Refresh to see them.', 'info');
+            showNotification('New jobs available! Refresh to see them.', 'info');
         }
     }, 30000); // 30 seconds
 }
@@ -1795,14 +1795,14 @@ function setupAutoRefresh() {
 // Enhanced analytics with real-time updates
 function updateLiveAnalytics() {
     const updates = [
-        '🆕 5 new Marketing Manager jobs posted in Kigali',
-        '📈 Tourism sector salaries increased by 8% this month',
-        '🔥 Agricultural specialists are in extremely high demand',
-        '🌍 International NGO opportunities increased by 30%',
-        '💼 12 African companies are actively hiring this week',
-        '⭐ Average job rating improved to 4.7/5',
-        '📍 Kigali leads in job postings across East Africa',
-        '💰 Average salary range: $20k - $45k'
+        '5 new Marketing Manager jobs posted in Kigali',
+        'Tourism sector salaries increased by 8% this month',
+        'Agricultural specialists are in extremely high demand',
+        'International NGO opportunities increased by 30%',
+        '12 African companies are actively hiring this week',
+        'Average job rating improved to 4.7/5',
+        'Kigali leads in job postings across East Africa',
+        'Average salary range: $20k - $45k'
     ];
     
     const randomUpdate = updates[Math.floor(Math.random() * updates.length)];
@@ -1841,7 +1841,7 @@ function createSmartAlert() {
     const applications = JSON.parse(localStorage.getItem('applications') || '[]');
     
     if (searchHistory.length === 0 && applications.length === 0) {
-        showNotification('Search for jobs first to create smart alerts! 💡', 'info');
+        showNotification('Search for jobs first to create smart alerts!', 'info');
         return;
     }
     
@@ -1867,5 +1867,5 @@ function createSmartAlert() {
     document.getElementById('alertLocation').value = suggestedLocation;
     
     showSection('alerts');
-    showNotification('Smart alert created based on your activity! 🤖', 'success');
+    showNotification('Smart alert created based on your activity!', 'success');
 }
