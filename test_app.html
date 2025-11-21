@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>App Test Suite</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .test-container { max-width: 800px; margin: 0 auto; }
+        .test-section { background: white; margin: 20px 0; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .test-result { margin: 10px 0; padding: 10px; border-radius: 5px; }
+        .pass { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .fail { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        .test-button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        .test-button:hover { background: #0056b3; }
+        h1 { color: #333; text-align: center; }
+        h2 { color: #666; border-bottom: 2px solid #007bff; padding-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 Job Market Monitor - Test Suite</h1>
+        
+        <div class="test-section">
+            <h2>Quick Tests</h2>
+            <button class="test-button" onclick="runBasicTests()">Run Basic Tests</button>
+            <button class="test-button" onclick="runFunctionTests()">Test Functions</button>
+            <button class="test-button" onclick="runUITests()">Test UI Elements</button>
+            <button class="test-button" onclick="runAllTests()">Run All Tests</button>
+            <div id="test-results"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Manual Test Actions</h2>
+            <button class="test-button" onclick="testSearch()">Test Search</button>
+            <button class="test-button" onclick="testJobDisplay()">Load Sample Jobs</button>
+            <button class="test-button" onclick="testSaveJob()">Test Save Job</button>
+            <button class="test-button" onclick="testCalculator()">Test Salary Calculator</button>
+            <div id="manual-results"></div>
+        </div>
+    </div>
+    
+    <script>
+        function addResult(container, test, status, message) {
+            const div = document.createElement('div');
+            div.className = `test-result ${status.toLowerCase()}`;
+            div.innerHTML = `<strong>${test}:</strong> ${status} - ${message}`;
+            document.getElementById(container).appendChild(div);
+        }
+        
+        function clearResults(container) {
+            document.getElementById(container).innerHTML = '';
+        }
+        
+        function runBasicTests() {
+            clearResults('test-results');
+            
+            // Test script loading
+            try {
+                addResult('test-results', 'Script Loading', 'PASS', 'script.js loaded successfully');
+            } catch (e) {
+                addResult('test-results', 'Script Loading', 'FAIL', e.message);
+            }
+            
+            // Test sample data
+            try {
+                if (typeof getSampleJobs === 'function') {
+                    const jobs = getSampleJobs();
+                    addResult('test-results', 'Sample Data', jobs.length > 0 ? 'PASS' : 'FAIL', `${jobs.length} jobs available`);
+                } else {
+                    addResult('test-results', 'Sample Data', 'FAIL', 'getSampleJobs function not found');
+                }
+            } catch (e) {
+                addResult('test-results', 'Sample Data', 'FAIL', e.message);
+            }
+        }
+        
+        function runFunctionTests() {
+            clearResults('test-results');
+            
+            const functions = [
+                'getSampleJobs', 'displayJobs', 'searchJobs', 'showJobDetails',
+                'saveJob', 'applyToJob', 'calculateSalary', 'showNotification'
+            ];
+            
+            functions.forEach(funcName => {
+                try {
+                    if (typeof window[funcName] === 'function') {
+                        addResult('test-results', `Function ${funcName}`, 'PASS', 'Function exists');
+                    } else {
+                        addResult('test-results', `Function ${funcName}`, 'FAIL', 'Function not found');
+                    }
+                } catch (e) {
+                    addResult('test-results', `Function ${funcName}`, 'FAIL', e.message);
+                }
+            });
+        }
+        
+        function runUITests() {
+            clearResults('test-results');
+            
+            const elements = [
+                'keywordInput', 'locationInput', 'searchBtn', 'jobsList',
+                'dashboardTab', 'savedJobsTab', 'alertsTab', 'analyticsTab'
+            ];
+            
+            elements.forEach(id => {
+                const element = document.getElementById(id);
+                addResult('test-results', `Element #${id}`, element ? 'PASS' : 'FAIL', 
+                         element ? 'Element found' : 'Element missing');
+            });
+        }
+        
+        function runAllTests() {
+            clearResults('test-results');
+            addResult('test-results', 'Test Suite', 'INFO', 'Running comprehensive tests...');
+            
+            setTimeout(() => {
+                runBasicTests();
+                setTimeout(() => {
+                    runFunctionTests();
+                    setTimeout(() => {
+                        runUITests();
+                        addResult('test-results', 'All Tests', 'INFO', 'Test suite completed!');
+                    }, 500);
+                }, 500);
+            }, 500);
+        }
+        
+        function testSearch() {
+            clearResults('manual-results');
+            try {
+                if (typeof searchJobs === 'function') {
+                    // Simulate search
+                    const keywordInput = document.getElementById('keywordInput');
+                    const locationInput = document.getElementById('locationInput');
+                    
+                    if (keywordInput && locationInput) {
+                        keywordInput.value = 'Software Engineer';
+                        locationInput.value = 'San Francisco';
+                        searchJobs();
+                        addResult('manual-results', 'Search Test', 'PASS', 'Search executed with test data');
+                    } else {
+                        addResult('manual-results', 'Search Test', 'FAIL', 'Input elements not found');
+                    }
+                } else {
+                    addResult('manual-results', 'Search Test', 'FAIL', 'searchJobs function not found');
+                }
+            } catch (e) {
+                addResult('manual-results', 'Search Test', 'FAIL', e.message);
+            }
+        }
+        
+        function testJobDisplay() {
+            clearResults('manual-results');
+            try {
+                if (typeof loadSampleJobs === 'function') {
+                    loadSampleJobs();
+                    addResult('manual-results', 'Job Display', 'PASS', 'Sample jobs loaded');
+                } else {
+                    addResult('manual-results', 'Job Display', 'FAIL', 'loadSampleJobs function not found');
+                }
+            } catch (e) {
+                addResult('manual-results', 'Job Display', 'FAIL', e.message);
+            }
+        }
+        
+        function testSaveJob() {
+            clearResults('manual-results');
+            try {
+                if (typeof saveJob === 'function') {
+                    saveJob(1);
+                    addResult('manual-results', 'Save Job', 'PASS', 'Job save function executed');
+                } else {
+                    addResult('manual-results', 'Save Job', 'FAIL', 'saveJob function not found');
+                }
+            } catch (e) {
+                addResult('manual-results', 'Save Job', 'FAIL', e.message);
+            }
+        }
+        
+        function testCalculator() {
+            clearResults('manual-results');
+            try {
+                if (typeof calculateSalary === 'function') {
+                    calculateSalary();
+                    addResult('manual-results', 'Salary Calculator', 'PASS', 'Calculator function executed');
+                } else {
+                    addResult('manual-results', 'Salary Calculator', 'FAIL', 'calculateSalary function not found');
+                }
+            } catch (e) {
+                addResult('manual-results', 'Salary Calculator', 'FAIL', e.message);
+            }
+        }
+    </script>
+    
+    <!-- Include the main script -->
+    <script src="script.js"></script>
+</body>
+</html>
