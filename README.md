@@ -31,10 +31,10 @@ Job Market Monitor addresses the real need for centralized job searching by:
    cd news-aggregator
    ```
 
-2. Open `public/index.html` in your browser or serve via HTTP server:
+2. Open `html/index.html` in your browser or serve via HTTP server:
    ```bash
    python -m http.server 8000
-   # Then visit http://localhost:8000/public/
+   # Then visit http://localhost:8000/html/
    ```
 
 ### API Configuration
