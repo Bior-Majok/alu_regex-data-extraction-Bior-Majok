@@ -18,7 +18,7 @@ Job Market Monitor addresses the real need for centralized job searching by:
 - **Analytics Dashboard**: Market trends, salary insights, skill demand
 - **Responsive Design**: Works on desktop and mobile devices
 
-## 🛠 Local Setup
+##  Local Setup
 
 ### Prerequisites
 - Modern web browser
@@ -38,7 +38,7 @@ Job Market Monitor addresses the real need for centralized job searching by:
    ```
 
 ### API Configuration
-1. Click the ⚙️ Settings button in the application
+1. Click the  Settings button in the application
 2. Configure API keys:
    - **JSearch API**: Get from [RapidAPI JSearch](https://rapidapi.com/letscrape-6bRBa3QguO5/api/jsearch)
    - **Adzuna API**: Get from [Adzuna Developer Portal](https://developer.adzuna.com/)
