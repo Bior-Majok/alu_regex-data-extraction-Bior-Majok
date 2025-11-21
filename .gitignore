@@ -1,0 +1,31 @@
+# Environment variables
+.env
+.env.local
+.env.production
+
+# API Keys (use api-config-example.js instead)
+api-config.js
+
+# Node modules
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Cache
+.cache/
