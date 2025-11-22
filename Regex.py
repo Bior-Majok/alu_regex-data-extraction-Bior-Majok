@@ -193,7 +193,7 @@ def main():
     # Enhanced sample text with comprehensive test cases
     sample_text = """
     CONTACT INFORMATION:
-    Email: support@example.com, sales@company.co.uk, invalid.email@com
+    Email: biormajok9@gmail.com, b.aguerkui@alustudent.com, biorsamuel01@gmail.com
     Alternative: admin@sub.domain.org, test-user+tag@test-domain.com
     
     WEBSITES:
@@ -236,7 +236,7 @@ def main():
     if results['emails']:
         for email in results['emails']:
             valid = extractor.validate_email(email)
-            status = "✓" if valid else "⚠"
+            status = "VALID" if valid else "INVALID"
             print(f"  {status} {email}")
     else:
         print("  No emails found")
@@ -245,7 +245,7 @@ def main():
     if results['urls']:
         for url in results['urls']:
             valid = extractor.validate_url(url)
-            status = "✓" if valid else "⚠"
+            status = "VALID" if valid else "INVALID"
             print(f"  {status} {url}")
     else:
         print("  No URLs found")
@@ -254,9 +254,9 @@ def main():
     if results['phone_numbers']:
         for phone in results['phone_numbers']:
             valid = extractor.validate_phone(phone)
-            status = "✓" if valid else "⚠"
+            status = "VALID" if valid else "INVALID"
             formatted = extractor.format_phone_number(phone)
-            print(f"  {status} {phone} → {formatted}")
+            print(f"  {status} {phone} -> {formatted}")
     else:
         print("  No phone numbers found")
     
@@ -264,9 +264,9 @@ def main():
     if results['credit_cards']:
         for card in results['credit_cards']:
             valid = extractor.validate_credit_card(card)
-            status = "✓" if valid else "⚠"
+            status = "VALID" if valid else "INVALID"
             cleaned = extractor.clean_credit_card(card)
-            print(f"  {status} {card} → {cleaned}")
+            print(f"  {status} {card} -> {cleaned}")
     else:
         print("  No credit card numbers found")
     
@@ -275,17 +275,17 @@ def main():
     if time_data['24_hour'] or time_data['12_hour']:
         print("  24-Hour Format:")
         for time in time_data['24_hour']:
-            print(f"    ✓ {time}")
+            print(f"    VALID {time}")
         print("  12-Hour Format:")
         for time in time_data['12_hour']:
-            print(f"    ✓ {time}")
+            print(f"    VALID {time}")
     else:
         print("  No time formats found")
     
     print("\n CURRENCY AMOUNTS:")
     if results['currency']:
         for amount in results['currency']:
-            print(f"  ✓ {amount}")
+            print(f"  VALID {amount}")
     else:
         print("  No currency amounts found")
     
@@ -335,9 +335,9 @@ def main():
         for value, expected in cases:
             validator = getattr(extractor, f'validate_{data_type}')
             is_valid = validator(value)
-            status = "✓ PASS" if is_valid == expected else "✗ FAIL"
-            check = "✓" if is_valid else "✗"
-            expected_check = "✓" if expected else "✗"
+            status = "PASS" if is_valid == expected else "FAIL"
+            check = "VALID" if is_valid else "INVALID"
+            expected_check = "VALID" if expected else "INVALID"
             print(f"  {status} [Got:{check} Expected:{expected_check}] {value}")
     
     print("\n" + "=" * 70)
@@ -360,7 +360,7 @@ def main():
     for data_type, count in stats:
         print(f"  {data_type}: {count}")
     
-    print(f"\n✅ Successfully implemented 6 data types (exceeds minimum requirement of 4)")
+    print(f"\nSuccessfully implemented 6 data types (exceeds minimum requirement of 4)")
     print(" Data types: Emails, URLs, Phone Numbers, Credit Cards, Time Formats, Currency")
     print("=" * 70)
 
@@ -384,7 +384,7 @@ def run_quick_test():
         if items or (isinstance(items, dict) and any(items.values())):
             print(f"  {data_type}: {items}")
     
-    print("✅ All 6 data types are functional!")
+    print("All 6 data types are functional!")
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
 
 A comprehensive data extraction tool using Regular Expressions to extract 6 different data types from text.
 
-## 📋 Project Overview
+##  Project Overview
 
 This project implements a Python-based data extraction system that uses regex patterns to identify and extract:
 
@@ -13,7 +13,7 @@ This project implements a Python-based data extraction system that uses regex pa
 5. **Time formats** - 14:30 (24-hour), 2:30 PM (12-hour)
 6. **Currency amounts** - $19.99, $1,234.56, 100 USD, 50 dollars
 
-## 🚀 Setup Instructions
+##  Setup Instructions
 
 ### Prerequisites
 - Python 3.7 or higher
@@ -61,7 +61,7 @@ is_valid_email = extractor.validate_email("test@example.com")
 is_valid_phone = extractor.validate_phone("(555) 123-4567")
 ```
 
-## 🧪 Testing
+##  Testing
 
 The project includes comprehensive test cases covering:
 - Valid formats for each data type
@@ -74,7 +74,7 @@ Run tests by executing the main script:
 python Regex
 ```
 
-## 📊 Sample Output
+## 📊Sample Output
 
 ```
 ======================================================================
@@ -117,7 +117,7 @@ Extracting: Emails, URLs, Phone Numbers, Credit Cards, Time, Currency
 - [x] **Output Presentation**: Comprehensive demonstrations and test cases
 - [x] **Repository**: Proper structure and documentation
 
-## 🏗️ Project Structure
+##  Project Structure
 
 ```
 alu_regex-data-extraction-{YourUsername}/
@@ -126,16 +126,16 @@ alu_regex-data-extraction-{YourUsername}/
 └── .gitignore             # Git ignore file
 ```
 
-## 🤝 Contributing
+##  Contributing
 
 This is an individual assignment project. For educational purposes only.
 
-## 📄 License
+##  License
 
 This project is created for ALU coursework and educational purposes.
 
----
+-
 
-**Author**: [Your Name]  
+**Author**: Bior Majok  
 **Course**: ALU Full Stack Development  
 **Assignment**: Regex Data Extraction Project
