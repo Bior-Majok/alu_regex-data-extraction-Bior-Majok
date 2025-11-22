@@ -43,7 +43,8 @@ Installation
 
 Clone the repository:
 
-git clone https://github.com Bior-Majok alu_regex-data-extraction-{YourUsername}.git
+git clone https://github.com Bior-Majok alu_regex-data-extraction-Bior-Majok
+.git
 cd alu_regex-data-extraction-Bior-Majok
 
 
