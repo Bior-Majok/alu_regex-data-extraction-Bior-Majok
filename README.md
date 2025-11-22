@@ -1,37 +1,58 @@
+ Regex Data Extraction Project
+
+This is a Python-based project that validates different types of data using Regular Expressions (Regex). It reads test cases from an external text file of sample test inputs, organizes them into categories with headers(like emails, phone numbers, credit cards, etc.), and evaluates whether each test case is valid or not according to the defined regex pattern.
+
 Project Overview
 
-This project implements a data extraction system that identifies and extracts the following types of information from text:
+Setup Instructions
 
-Email addresses – e.g., user@example.com, firstname.lastname@company.co.uk
+Usage
 
-URLs – e.g., https://www.example.com, https://subdomain.example.org/page
+Testing
 
-Phone numbers – e.g., (123) 456-7890, 123-456-7890, 123.456.7890
+Sample Output
 
-Credit card numbers – e.g., 1234 5678 9012 3456, 1234-5678-9012-3456
+Regex Patterns
+
+Contributing
+
+Project Overview
+
+This project extracts the following data types from text:
+
+Email addresses – e.g., user@example.com
+
+URLs – e.g., https://www.example.com
+
+Phone numbers – e.g., (123) 456-7890, 123-456-7890
+
+Credit card numbers – e.g., 1234 5678 9012 3456
 
 Time formats – e.g., 14:30 (24-hour), 2:30 PM (12-hour)
 
 Currency amounts – e.g., $19.99, $1,234.56, 100 USD, 50 dollars
+
+The tool is built with Python 3 and uses the re module—no external dependencies required.
 
 Setup Instructions
 Prerequisites
 
 Python 3.7 or higher
 
-No external dependencies (uses built-in re module)
-
 Installation
 
 Clone the repository:
 
-git clone https://github.com/yourusername/alu_regex-data-extraction-{YourUsername}.git
-cd alu_regex-data-extraction-{YourUsername}
+git clone https://github.com Bior-Majok alu_regex-data-extraction-{YourUsername}.git
+cd alu_regex-data-extraction-Bior-Majok
 
 
-Run the main script:
+Run the main Python script:
 
-python Regex
+python Regex.py
+
+
+Ensure the main file is named Regex.py.
 
 Usage
 Extract All Data Types
@@ -54,7 +75,7 @@ is_valid_phone = extractor.validate_phone("(555) 123-4567")
 
 Testing
 
-The project includes comprehensive test cases covering:
+The project includes comprehensive test cases for:
 
 Valid formats for each data type
 
@@ -64,9 +85,9 @@ Multiple items in a single text
 
 Mixed content scenarios
 
-Run tests by executing the main script:
+Run the tests with:
 
-python Regex
+python Regex.py
 
 Sample Output
 ======================================================================
@@ -90,8 +111,8 @@ PHONE NUMBERS:
 
 Regex Patterns
 Data Type	Pattern	Description
-Email	\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b	Matches standard email formats
-URL	https?://(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&/=]*)	HTTP/HTTPS URLs with optional www
+Email	\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b	Standard email formats
+URL	https?://(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&/=]*)	HTTP/HTTPS URLs
 Phone	`(?:
 \d
 3
@@ -101,10 +122,12 @@ Time 24hr	`\b(?:[01]?[0-9]	2[0-3]):[0-5][0-9]\b`
 Time 12hr	`\b(?:1[0-2]	0?[1-9]):[0-5][0-9]\s?(?:AM
 Currency	`$\d{1,3}(?:,\d{3})*(?:.\d{2})?	\b\d+\s*(?:dollars
 
-
 Contributing
 
-This is an individual assignment project for educational purposes only.
+This project is for educational purposes. Contributions are welcome for improvements or bug fixes.
 
+License
 
-Author: [Your Name]
+Created for ALU coursework and educational purposes.
+
+Author: Bior-Majok
