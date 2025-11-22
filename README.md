@@ -106,4 +106,4 @@ PHONE NUMBERS:
 | Currency | `\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\|\b\d+\s*(?:dollars\|USD)\b` | USD formats |
 
 ## Author
-Bior-Majok
+Bior-Majok Aguer
