@@ -1,112 +1,114 @@
+======================================================================
 DATA EXTRACTION TOOL - 6 DATA TYPES IMPLEMENTED
 ======================================================================
 Extracting: Emails, URLs, Phone Numbers, Credit Cards, Time, Currency
 ======================================================================
 
  EMAIL ADDRESSES:
-  ✓ support@example.com
-  ✓ sales@company.co.uk
-  ✓ admin@sub.domain.org
-  ✓ test-user+tag@test-domain.com
-  ✓ test1@domain.com
-  ✓ test2@domain.org
-  ✓ hello@test.com
+  VALID biormajok9@gmail.com
+  VALID b.aguerkui@alustudent.com
+  VALID biorsamuel01@gmail.com
+  VALID admin@sub.domain.org
+  VALID test-user+tag@test-domain.com
+  VALID test1@domain.com
+  VALID test2@domain.org
+  VALID hello@test.com
 
  URLs:
-  ✓ https://www.example.com
-  ✓ https://subdomain.example.org/page
-  ✓ https://short.is/abc123
+  VALID https://www.example.com
+  VALID https://subdomain.example.org/page
+  VALID https://short.is/abc123
 
  PHONE NUMBERS:
-  ✓ (123) 456-7890 → (123) 456-7890
-  ✓ 123-456-7890 → (123) 456-7890
-  ✓ 123.456.7890 → (123) 456-7890
-  ✓ 123-456-7890 → (123) 456-7890
-  ✓ 234-5678 → 2345678
-  ✓ 012-3456 → 0123456
-  ✓ 1234567890 → (123) 456-7890
-  ✓ 234-5678 → 2345678
-  ✓ 456-7890 → 4567890
-  ✓ 555-123-4567 → (555) 123-4567
+  VALID (123) 456-7890 -> (123) 456-7890
+  VALID 123-456-7890 -> (123) 456-7890
+  VALID 123.456.7890 -> (123) 456-7890
+  VALID 123-456-7890 -> (123) 456-7890
+  VALID 234-5678 -> 2345678
+  VALID 012-3456 -> 0123456
+  VALID 1234567890 -> (123) 456-7890
+  VALID 234-5678 -> 2345678
+  VALID 456-7890 -> 4567890
+  VALID 555-123-4567 -> (555) 123-4567
 
  CREDIT CARD NUMBERS:
-  ✓ 1234 5678 9012 3456 → 1234567890123456
-  ✓ 1234-5678-9012-3456 → 1234567890123456
-  ✓ 1234567890123456 → 1234567890123456
+  VALID 1234 5678 9012 3456 -> 1234567890123456
+  VALID 1234-5678-9012-3456 -> 1234567890123456
+  VALID 1234567890123456 -> 1234567890123456
 
  TIME FORMATS:
   24-Hour Format:
-    ✓ 14:30
-    ✓ 09:00
-    ✓ 23:59
-    ✓ 2:30
-    ✓ 9:00
-    ✓ 11:59
-    ✓ 13:00
+    VALID 14:30
+    VALID 09:00
+    VALID 23:59
+    VALID 2:30
+    VALID 9:00
+    VALID 11:59
+    VALID 13:00
   12-Hour Format:
-    ✓ 2:30 PM
-    ✓ 9:00 AM
-    ✓ 11:59 pm
+    VALID 2:30 PM
+    VALID 9:00 AM
+    VALID 11:59 pm
 
  CURRENCY AMOUNTS:
-  ✓ $19.99
-  ✓ $1,234.56
-  ✓ 100 USD
-  ✓ 50 dollars
-  ✓ $500
-  ✓ $12,345,678.90
-  ✓ $99.99
+  VALID $19.99
+  VALID $1,234.56
+  VALID 100 USD
+  VALID 50 dollars
+  VALID $500
+  VALID $12,345,678.90
+  VALID $99.99
 
 ======================================================================
 COMPREHENSIVE VALIDATION TESTS
 ======================================================================
 
 EMAIL Validation:
-  ✓ PASS [Got:✓ Expected:✓] user@example.com
-  ✓ PASS [Got:✓ Expected:✓] firstname.lastname@company.co.uk
-  ✓ PASS [Got:✓ Expected:✓] test-user+tag@domain.org      
-  ✓ PASS [Got:✗ Expected:✗] invalid.email
-  ✓ PASS [Got:✗ Expected:✗] missing@tld.
-  ✓ PASS [Got:✗ Expected:✗] @nodomain.com
+  PASS [Got:VALID Expected:VALID] user@example.com        
+  PASS [Got:VALID Expected:VALID] firstname.lastname@company.co.uk
+  PASS [Got:VALID Expected:VALID] test-user+tag@domain.org
+  PASS [Got:INVALID Expected:INVALID] invalid.email       
+  PASS [Got:INVALID Expected:INVALID] missing@tld.        
+  PASS [Got:INVALID Expected:INVALID] @nodomain.com       
 
 URL Validation:
-  ✓ PASS [Got:✓ Expected:✓] https://www.example.com       
-  ✓ PASS [Got:✓ Expected:✓] https://subdomain.example.org/page
-  ✓ PASS [Got:✓ Expected:✓] http://test.com
-  ✓ PASS [Got:✓ Expected:✓] https://short.is/abc
-  ✓ PASS [Got:✗ Expected:✗] not-a-url
-  ✓ PASS [Got:✗ Expected:✗] htt://bad-protocol.com        
+  PASS [Got:VALID Expected:VALID] https://www.example.com 
+  PASS [Got:VALID Expected:VALID] https://subdomain.example.org/page
+  PASS [Got:VALID Expected:VALID] http://test.com
+  PASS [Got:VALID Expected:VALID] https://short.is/abc    
+  PASS [Got:INVALID Expected:INVALID] not-a-url
+  PASS [Got:INVALID Expected:INVALID] htt://bad-protocol.com
 
 PHONE Validation:
-  ✓ PASS [Got:✓ Expected:✓] (123) 456-7890
-  ✓ PASS [Got:✓ Expected:✓] 123-456-7890
-  ✓ PASS [Got:✓ Expected:✓] 123.456.7890
-  ✓ PASS [Got:✓ Expected:✓] 1234567890
-  ✓ PASS [Got:✓ Expected:✓] 456-7890
-  ✓ PASS [Got:✗ Expected:✗] 12345
-  ✓ PASS [Got:✗ Expected:✗] 123-456
+  PASS [Got:VALID Expected:VALID] (123) 456-7890
+  PASS [Got:VALID Expected:VALID] 123-456-7890
+  PASS [Got:VALID Expected:VALID] 123.456.7890
+  PASS [Got:VALID Expected:VALID] 1234567890
+  PASS [Got:VALID Expected:VALID] 456-7890
+  PASS [Got:INVALID Expected:INVALID] 12345
+  PASS [Got:INVALID Expected:INVALID] 123-456
 
 CREDIT_CARD Validation:
-  ✓ PASS [Got:✓ Expected:✓] 1234 5678 9012 3456
-  ✓ PASS [Got:✓ Expected:✓] 1234-5678-9012-3456
-  ✓ PASS [Got:✓ Expected:✓] 1234567890123456
-  ✓ PASS [Got:✗ Expected:✗] 1234
-  ✓ PASS [Got:✗ Expected:✗] 1234-5678-9012
-  ✓ PASS [Got:✗ Expected:✗] 1234 5678 9012 3456 7890      
+  PASS [Got:VALID Expected:VALID] 1234 5678 9012 3456     
+  PASS [Got:VALID Expected:VALID] 1234-5678-9012-3456     
+  PASS [Got:VALID Expected:VALID] 1234567890123456        
+  PASS [Got:INVALID Expected:INVALID] 1234
+  PASS [Got:INVALID Expected:INVALID] 1234-5678-9012      
+  PASS [Got:INVALID Expected:INVALID] 1234 5678 9012 3456 7890
 
 ======================================================================
 EXTRACTION STATISTICS
 ======================================================================
 
- Total items extracted: 40
-  Emails: 7
+ Total items extracted: 41
+  Emails: 8
   Urls: 3
   Phone Numbers: 10
   Credit Cards: 3
   Time Formats: 10
   Currency: 7
 
-✅ Successfully implemented 6 data types (exceeds minimum requirement of 4)
+Successfully implemented 6 data types (exceeds minimum requirement of 4)
  Data types: Emails, URLs, Phone Numbers, Credit Cards, Time Formats, Currency
 ======================================================================
 
@@ -120,4 +122,4 @@ Results:
   urls: ['https://example.com']
   phone_numbers: ['(555) 123-4567']
   time_formats: {'12_hour': [], '24_hour': []}
-✅ All 6 data types are functional!
+All 6 data types are functional!
