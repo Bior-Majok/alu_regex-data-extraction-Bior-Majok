@@ -105,9 +105,5 @@ PHONE NUMBERS:
 | Time 12hr | `\b(?:1[0-2]\|0?[1-9]):[0-5][0-9]\s?(?:AM\|PM\|am\|pm)\b` | 12-hour format |
 | Currency | `\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\|\b\d+\s*(?:dollars\|USD)\b` | USD formats |
 
-## Contributing
-
-This project is for educational purposes. Contributions are welcome for improvements or bug fixes.
-
 ## Author
 Bior-Majok
