@@ -1,141 +1,162 @@
-# ALU Regex Data Extraction Project
+Project Overview
+A comprehensive Python data extraction tool that uses Regular Expressions to identify and extract six different data types from text content. This tool is designed to process large volumes of text and extract structured information efficiently.
 
-A comprehensive data extraction tool using Regular Expressions to extract 6 different data types from text.
+Features
+Email Address Extraction: user@example.com, firstname.lastname@company.co.uk
 
-## 📋 Project Overview
+URL Extraction: https://www.example.com, https://subdomain.example.org/page
 
-This project implements a Python-based data extraction system that uses regex patterns to identify and extract:
+Phone Number Extraction: (123) 456-7890, 123-456-7890, 123.456.7890
 
-1. **Email addresses** - user@example.com, firstname.lastname@company.co.uk
-2. **URLs** - https://www.example.com, https://subdomain.example.org/page
-3. **Phone numbers** - (123) 456-7890, 123-456-7890, 123.456.7890
-4. **Credit card numbers** - 1234 5678 9012 3456, 1234-5678-9012-3456
-5. **Time formats** - 14:30 (24-hour), 2:30 PM (12-hour)
-6. **Currency amounts** - $19.99, $1,234.56, 100 USD, 50 dollars
+Credit Card Number Extraction: 1234 5678 9012 3456, 1234-5678-9012-3456
 
-## 🚀 Setup Instructions
+Time Format Extraction: 14:30 (24-hour), 2:30 PM (12-hour)
 
-### Prerequisites
-- Python 3.7 or higher
-- No external dependencies required (uses built-in `re` module)
+Currency Amount Extraction: $19.99, $1,234.56, 100 USD, 50 dollars
 
-### Installation
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/yourusername/alu_regex-data-extraction-{YourUsername}.git
-   cd alu_regex-data-extraction-{YourUsername}
-   ```
+Installation
+Prerequisites
+Python 3.7 or higher
 
-2. Run the main script:
-   ```bash
-   python Regex
-   ```
+No external dependencies required (uses Python's built-in re module)
 
-## 💻 Usage
+Setup
+Clone this repository:
 
-### Basic Usage
-```python
+bash
+git clone https://github.com/yourusername/alu_regex-data-extraction-YourUsername.git
+cd alu_regex-data-extraction-YourUsername
+Run the main script:
+
+bash
+python Regex.py
+Usage
+Basic Usage
+python
 from Regex import DataExtractor
 
 # Create extractor instance
 extractor = DataExtractor()
 
-# Extract all data types
-text = "Contact us at support@example.com or call (555) 123-4567"
+# Sample text containing various data types
+text = "Contact us at support@example.com or call (555) 123-4567. Visit https://example.com"
+
+# Extract all data types at once
 results = extractor.extract_all(text)
 print(results)
-```
-
-### Individual Extraction
-```python
+Individual Data Extraction
+python
 # Extract specific data types
 emails = extractor.extract_emails(text)
-phones = extractor.extract_phone_numbers(text)
+phone_numbers = extractor.extract_phone_numbers(text)
 urls = extractor.extract_urls(text)
-```
-
-### Validation
-```python
+credit_cards = extractor.extract_credit_cards(text)
+time_formats = extractor.extract_time_formats(text)
+currency_amounts = extractor.extract_currency(text)
+Data Validation
+python
 # Validate individual items
 is_valid_email = extractor.validate_email("test@example.com")
 is_valid_phone = extractor.validate_phone("(555) 123-4567")
-```
+is_valid_url = extractor.validate_url("https://example.com")
+is_valid_credit_card = extractor.validate_credit_card("1234-5678-9012-3456")
+Utility Methods
+python
+# Clean credit card numbers by removing separators
+cleaned_card = extractor.clean_credit_card("1234-5678-9012-3456")
+# Returns: "1234567890123456"
 
-## 🧪 Testing
+# Format phone numbers consistently
+formatted_phone = extractor.format_phone_number("1234567890", "standard")
+# Returns: "(123) 456-7890"
+Testing
+The project includes comprehensive test cases that cover:
 
-The project includes comprehensive test cases covering:
-- Valid formats for each data type
-- Edge cases and invalid inputs
-- Multiple items in single text
-- Mixed content scenarios
+Valid formats for each data type
 
-Run tests by executing the main script:
-```bash
-python Regex
-```
+Edge cases and invalid inputs
 
-## 📊 Sample Output
+Multiple items within single text blocks
 
-```
+Mixed content scenarios
+
+Run the complete test suite by executing:
+
+bash
+python Regex.py
+Sample Output
+text
 ======================================================================
 DATA EXTRACTION TOOL - 6 DATA TYPES IMPLEMENTED
 ======================================================================
 Extracting: Emails, URLs, Phone Numbers, Credit Cards, Time, Currency
 ======================================================================
 
- EMAIL ADDRESSES:
-  ✓ support@example.com
-  ✓ sales@company.co.uk
-  ✓ admin@sub.domain.org
+EMAIL ADDRESSES:
+  [VALID] support@example.com
+  [VALID] sales@company.co.uk
+  [VALID] admin@sub.domain.org
 
- URLs:
-  ✓ https://www.example.com
-  ✓ https://subdomain.example.org/page
+URLS:
+  [VALID] https://www.example.com
+  [VALID] https://subdomain.example.org/page
 
- PHONE NUMBERS:
-  ✓ (123) 456-7890 → (123) 456-7890
-  ✓ 123-456-7890 → (123) 456-7890
-```
+PHONE NUMBERS:
+  [VALID] (123) 456-7890 -> (123) 456-7890
+  [VALID] 123-456-7890 -> (123) 456-7890
 
-## 🔍 Regex Patterns
+CREDIT CARD NUMBERS:
+  [VALID] 1234 5678 9012 3456 -> 1234567890123456
+  [VALID] 1234-5678-9012-3456 -> 1234567890123456
 
-| Data Type | Pattern | Description |
-|-----------|---------|-------------|
-| Email | `\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b` | Matches standard email formats |
-| URL | `https?://(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&/=]*)` | HTTP/HTTPS URLs with optional www |
-| Phone | `(?:\(\d{3}\)\s?\|\d{3}[-.]?)?\d{3}[-.]?\d{4}` | Various US phone number formats |
-| Credit Card | `\b(?:\d{4}[- ]?){3}\d{4}\b` | 16-digit cards with separators |
-| Time 24hr | `\b(?:[01]?[0-9]\|2[0-3]):[0-5][0-9]\b` | 24-hour time format |
-| Time 12hr | `\b(?:1[0-2]\|0?[1-9]):[0-5][0-9]\s?(?:AM\|PM\|am\|pm)\b` | 12-hour time with AM/PM |
-| Currency | `\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?\|\b\d+\s*(?:dollars\|USD)\b` | USD amounts in various formats |
+EXTRACTION STATISTICS
+======================================================================
+Total items extracted: 23
+Emails: 5
+Urls: 4
+Phone Numbers: 4
+Credit Cards: 3
+Time Formats: 4
+Currency: 3
+Regular Expression Patterns
+Email Addresses
+text
+\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b
+Matches standard email formats including subdomains and special characters.
 
-## ✅ Assignment Requirements Met
+URLs
+text
+https?://(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&/=]*)
+Matches HTTP and HTTPS URLs with optional www subdomain and path components.
 
-- [x] **Regex Accuracy**: 6/8 data types implemented (exceeds minimum of 4)
-- [x] **Code Quality**: Clean, readable, well-documented code
-- [x] **Edge Cases**: Handles malformed input and multiple formats
-- [x] **Output Presentation**: Comprehensive demonstrations and test cases
-- [x] **Repository**: Proper structure and documentation
+Phone Numbers
+text
+(?:\(\d{3}\)\s?|\d{3}[-.]?)?\d{3}[-.]?\d{4}
+Matches various US phone number formats with optional area code.
 
-## 🏗️ Project Structure
+Credit Card Numbers
+text
+\b(?:\d{4}[- ]?){3}\d{4}\b
+Matches 16-digit credit card numbers with space or hyphen separators.
 
-```
-alu_regex-data-extraction-{YourUsername}/
-├── Regex                    # Main Python file with DataExtractor class
-├── README.md               # This documentation
-└── .gitignore             # Git ignore file
-```
+Time Formats
+24-hour: \b([01]?[0-9]|2[0-3]):[0-5][0-9]\b
 
-## 🤝 Contributing
+12-hour: \b(1[0-2]|0?[1-9]):[0-5][0-9]\s?(?:AM|PM|am|pm)\b
 
-This is an individual assignment project. For educational purposes only.
+Currency Amounts
+text
+\$\d{1,3}(?:,\d{3})*(?:\.\d{2})?|\b\d+\s*(?:dollars|USD)\b
+Matches USD currency in both symbolic ($) and word-based formats.
+Performance
+Optimized regex patterns for efficient text processing
 
-## 📄 License
+Suitable for processing large volumes of text data
 
-This project is created for ALU coursework and educational purposes.
+Memory-efficient operations for batch processing
 
----
+Single-pass extraction capabilities
 
-**Author**: [Your Name]  
-**Course**: ALU Full Stack Development  
-**Assignment**: Regex Data Extraction Project
+Author
+Bior Majok 
+
