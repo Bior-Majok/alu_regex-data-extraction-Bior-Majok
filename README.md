@@ -1,10 +1,10 @@
- Regex Data Extraction Project
-
+ **Regex Data Extraction Project
+**
 This is a Python-based project that validates different types of data using Regular Expressions (Regex). It reads test cases from an external text file of sample test inputs, organizes them into categories with headers(like emails, phone numbers, credit cards, etc.), and evaluates whether each test case is valid or not according to the defined regex pattern.
 
-Project Overview
+**Project Overview**
 
-Setup Instructions
+**Setup Instructions**
 
 Usage
 
@@ -18,8 +18,8 @@ Contributing
 
 Project Overview
 
-This project extracts the following data types from text:
-
+**This project extracts the following data types from text:
+**
 Email addresses – e.g., user@example.com
 
 URLs – e.g., https://www.example.com
@@ -34,21 +34,22 @@ Currency amounts – e.g., $19.99, $1,234.56, 100 USD, 50 dollars
 
 The tool is built with Python 3 and uses the re module—no external dependencies required.
 
-Setup Instructions
+**Setup Instructions**
 Prerequisites
 
 Python 3.7 or higher
 
 Installation
 
-Clone the repository:
+**Clone the repository:**
 
 git clone https://github.com Bior-Majok alu_regex-data-extraction-Bior-Majok
 .git
+
 cd alu_regex-data-extraction-Bior-Majok
 
 
-Run the main Python script:
+**Run the main Python script**:
 
 python Regex.py
 
@@ -74,7 +75,7 @@ Validate Individual Items
 is_valid_email = extractor.validate_email("test@example.com")
 is_valid_phone = extractor.validate_phone("(555) 123-4567")
 
-Testing
+**Testing**
 
 The project includes comprehensive test cases for:
 
@@ -123,12 +124,10 @@ Time 24hr	`\b(?:[01]?[0-9]	2[0-3]):[0-5][0-9]\b`
 Time 12hr	`\b(?:1[0-2]	0?[1-9]):[0-5][0-9]\s?(?:AM
 Currency	`$\d{1,3}(?:,\d{3})*(?:.\d{2})?	\b\d+\s*(?:dollars
 
-Contributing
+**Contributing**
 
 This project is for educational purposes. Contributions are welcome for improvements or bug fixes.
 
-License
 
-Created for ALU coursework and educational purposes.
-
-Author: Bior-Majok
+**Author:**
+Bior-Majok
